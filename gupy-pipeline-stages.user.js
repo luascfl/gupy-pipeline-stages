@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gupy Pipeline Stages
 // @namespace    https://github.com/luascfl/gupy-pipeline-stages
-// @version      2.0.1
+// @version      2.0.2
 // @description  Create all six configured pipeline stages after manual confirmation.
 // @author       luascfl
 // @license      MIT
@@ -276,5 +276,4 @@
     document.body.append(panel);
   }
   if (typeof GM_registerMenuCommand === 'function') GM_registerMenuCommand('Show Gupy Pipeline Stages', mount);
-  mount();
 })();
