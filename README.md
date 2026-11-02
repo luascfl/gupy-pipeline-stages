@@ -12,7 +12,7 @@ A manually started userscript replacement for the reachable production path in `
 
 ## Manual operation
 
-Install the `.user.js` file in a userscript manager, open the intended Gupy job steps page, then choose **Show Gupy Pipeline Stages** from the userscript-manager menu. Click **Create configured stages** in the panel and accept the browser confirmation. The script does not inject a panel automatically. The panel reports cancellation, a stopped stage/error, or confirmed completion.
+Install the `.user.js` file in a userscript manager, then open the intended Gupy job steps page. The floating panel appears automatically. Click **Create configured stages** and accept the browser confirmation. The userscript-manager menu also includes **Open Gupy jobs** and **Show Gupy Pipeline Stages**. The panel reports cancellation, a stopped stage/error, or confirmed completion.
 
 The script has a single-run guard. It scopes the name, configuration fields, and `#btn-save-step` to the active stage form; it waits for a saved stage to appear and the editor to close before it creates the next one. A page/form error or missing/ambiguous control stops the remaining stages and does not claim success.
 

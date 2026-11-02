@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Gupy Pipeline Stages
 // @namespace    https://github.com/luascfl/gupy-pipeline-stages
-// @version      2.0.2
+// @version      2.0.3
 // @description  Create all six configured pipeline stages after manual confirmation.
 // @author       luascfl
 // @license      MIT
@@ -9,6 +9,7 @@
 // @downloadURL  https://raw.githubusercontent.com/luascfl/gupy-pipeline-stages/main/gupy-pipeline-stages.user.js
 // @updateURL    https://raw.githubusercontent.com/luascfl/gupy-pipeline-stages/main/gupy-pipeline-stages.user.js
 // @grant        GM_registerMenuCommand
+// @grant        GM_openInTab
 // @run-at       document-idle
 // ==/UserScript==
 
@@ -18,6 +19,15 @@
   const TIMEOUT = 20000;
   const PHASE_TRIGGER = '.form-group > .dropdownSync .css-hlgwow';
   const JUSTIFICATION = '[data-testid="job-external-step-form"] > *:nth-child(2) > * > * > *:nth-child(1)';
+
+  function openGupyJobs() {
+    const url = 'https://portal.gupy.io/companies/jobs';
+    if (typeof GM_openInTab === 'function') {
+      GM_openInTab(url, { active: true, insert: true, setParent: true });
+      return;
+    }
+    window.open(url, '_blank', 'noopener');
+  }
   // Positions, payloads and selectors come from the reachable Automa groups.
   // Repeated phase clicks in the recording are normalized to one selected value.
   const STAGES = Object.freeze([
@@ -275,5 +285,9 @@
     button.addEventListener('click', run);
     document.body.append(panel);
   }
-  if (typeof GM_registerMenuCommand === 'function') GM_registerMenuCommand('Show Gupy Pipeline Stages', mount);
+  if (typeof GM_registerMenuCommand === 'function') {
+    GM_registerMenuCommand('Open Gupy jobs', openGupyJobs);
+    GM_registerMenuCommand('Show Gupy Pipeline Stages', mount);
+  }
+  mount();
 })();
